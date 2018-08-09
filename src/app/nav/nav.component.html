@@ -1,0 +1,24 @@
+<!-- navbar.component.html -->
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <a class="navbar-brand" href="#">
+    CSI |
+  </a>
+
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+  <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#header" (click)="toggleNavbarOff()">Home</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#skills" (click)="toggleNavbarOff()">Feedback and support</a>
+      </li>
+    </ul>
+      <button mat-button class="my-2 my-sm-0 mr-2" (click)="openDialogLogin()">Login</button>
+      <button mat-button class="my-2 my-sm-0 mr-2" (click)="openDialogRegister()">Register</button>
+  </div>

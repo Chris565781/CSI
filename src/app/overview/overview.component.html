@@ -1,0 +1,43 @@
+<mat-dialog-content>
+
+
+
+
+  <mat-tab-group [selectedIndex]="selectedIndex">
+    <mat-tab label="Login">
+      <div class="container-fluid d-flex justify-content-center align-items-center mt-3">
+        <form class="example-form">
+          <mat-form-field class="example-full-width mr-sm-2">
+            <input matInput placeholder="Username">
+          </mat-form-field>
+          <div>
+            <mat-form-field class="example-full-width mr-sm-2">
+              <input matInput placeholder="Password">
+            </mat-form-field>
+          </div>
+        </form>
+      </div>
+      <div class="container d-flex justify-content-end">
+        <button mat-stroked-button class="my-sm-0 my-2 align-self-end" type="submit">Login</button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Register">
+      <div class="container-fluid d-flex justify-content-center align-items-center mt-3">
+        <form class="example-form">
+          <mat-form-field class="example-full-width mr-sm-2">
+            <input matInput placeholder="Username">
+          </mat-form-field>
+          <div>
+            <mat-form-field class="example-full-width mr-sm-2">
+              <input matInput placeholder="Password">
+            </mat-form-field>
+          </div>
+        </form>
+      </div>
+      <div class="container d-flex justify-content-end">
+        <button mat-stroked-button class="my-sm-0 my-2 align-self-end" type="submit">Register</button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+</mat-dialog-content>

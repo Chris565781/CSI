@@ -1,0 +1,75 @@
+<!-- header -->
+<header id="feedback" class="bg-dark py-5">
+  <div class="container">
+    <div class="row height">
+      <div class="col">
+        <h1 class="text-danger text-uppercase font-weight-bold font-italic">
+          <span *ngIf="feedbackEnabled">
+            <strong>Feedback
+              <small class="text-light">and Support</small>
+            </strong>
+          </span>
+          <span *ngIf="!feedbackEnabled">
+            <strong>Support
+              <small class="text-light">and Feedback</small>
+            </strong>
+          </span>
+        </h1>
+        <!-- w-75 so that on a larger sceen the paragraph does not span the whole screen-->
+        <mat-tab-group (selectedTabChange)="onLinkClick($event)">
+          <mat-tab label="Feedback">
+            <div class="container-fluid my-3 height-50 d-flex align-items-center">
+              <div class="row">
+                <div class="col-md-9 col-sm-12">
+                  <p>Write a short or long message to the devs.</p>
+                  <textarea name="comment" form="" rows="3" cols="70">Hey CSI team, (message) thanks, (your name).</textarea>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <p>Feedback is grealty appreciated, whether you want to suggest a feature or report a bug, you have the ability
+                    to greatly impact development.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Support">
+            <div class="container-fluid my-3 height-50 d-flex align-items-center">
+              <div class="row">
+                <p class="col-md-6">
+                  <p>Hey all, I'm possionate about counter strike, followed the pro Counter-Strike scene since 2014. This project
+                    has given me the opportunity to learn more about web development, in a way which is intersting to me.
+                    I'm actively working on this website and looking at community feedback. Unfortunately, there's costs
+                    involed with keeping the site running and maintainence. If you love CSI and want to donate to it's development,
+                    please consider donating below, thanks, CC.</p>
+              </div>
+              <div class="col-md-6">
+                <!-- card -->
+                <mat-card class="example-card">
+                  <mat-card-header>
+                    <div mat-card-avatar class="donate-header-image"></div>
+                    <mat-card-title>Donate</mat-card-title>
+                    <mat-card-subtitle>Server costs</mat-card-subtitle>
+                  </mat-card-header>
+                  <img mat-card-image src="../../assets/img/Servers.jpeg" alt="Server development">
+                  <mat-card-content>
+                    <p>
+                      Contributes towards the cost of web hosting and development for Counter Strike Improve.
+                    </p>
+                  </mat-card-content>
+                  <mat-card-actions>
+                    <button mat-button>Donate $5</button>
+                  </mat-card-actions>
+                </mat-card>
+                <!-- end of card -->
+              </div>
+            </div>
+
+
+          </mat-tab>
+        </mat-tab-group>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- End of header-->
