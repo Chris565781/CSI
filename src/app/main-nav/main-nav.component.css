@@ -1,0 +1,40 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+}
+
+/* @media (min-width:768px) {
+  .sidenav {
+    display: none;
+  }
+}
+
+@media (max-width:768px) {
+  
+} */
+
+.linkh {
+    display:none;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .hidden2 {
+    display: none;
+  }
+
+  .link-colour:hover {
+    color: black ;
+    text-decoration: none;
+} 

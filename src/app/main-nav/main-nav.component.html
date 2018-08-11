@@ -1,0 +1,31 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav hidden" fixedInViewport="false" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)" [ngClass]="{hidden: !(isHandset$ | async)}">
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/feedback']">Feedback and Support</a>
+      <a mat-list-item (click)="openDialogLogin()">Login</a>
+      <a mat-list-item (click)="openDialogRegister()">Register</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+        <i class="fas fa-bars"></i>
+        <!-- <mat-icon aria-label="Side nav toggle icon">menu</mat-icon> -->
+      </button>
+      <span class="mx-3">
+        <a class="link-colour" [routerLink]="['/home']">CSI</a>
+      </span>
+      <span class="my-3 my-sm-0 mr-2">
+        <button mat-button [routerLink]="['/feedback']">Feedback and Support</button>
+      </span>
+      <div class="container d-flex justify-content-end">
+        <button mat-button class="my-2 my-sm-0 mr-2 linkh" [ngClass]="{linkh: (isHandset$ | async)}" (click)="openDialogLogin()">Login</button>
+        <button mat-button class="my-2 my-sm-0 mr-2 linkh" [ngClass]="{linkh: (isHandset$ | async)}" (click)="openDialogRegister()">Register</button>
+      </div>
+    </mat-toolbar>
+    <ng-content></ng-content>
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

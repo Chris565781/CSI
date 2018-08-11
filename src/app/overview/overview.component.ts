@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
@@ -9,9 +8,12 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class OverviewComponent implements OnInit {
   selectedIndex: any;
+  model: any = {};
+
   constructor(
     public dialogRef: MatDialogRef<OverviewComponent>,
-    @Inject(MAT_DIALOG_DATA) public login: boolean) {
+    @Inject(MAT_DIALOG_DATA) public login: boolean
+  ) {
     if (login === true) {
       this.selectedIndex = 0;
       console.log('secected index set to 0');
@@ -25,7 +27,9 @@ export class OverviewComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  ngOnInit() {
+  userLogin() {
+    console.log(this.model);
   }
 
+  ngOnInit() {}
 }

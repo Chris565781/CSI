@@ -11,7 +11,7 @@ export class NavComponent implements OnInit {
   navbarOpen = false;
   login = false;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog) {}
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
@@ -25,7 +25,7 @@ export class NavComponent implements OnInit {
     this.login = true;
     const dialogRef = this.dialog.open(OverviewComponent, {
       /* width: '2000px', */
-      data: true,
+      data: true
     });
   }
 
@@ -33,12 +33,11 @@ export class NavComponent implements OnInit {
     this.login = false;
     const dialogRef = this.dialog.open(OverviewComponent, {
       /* width: '2000px', */
-      data: false,
+      data: false
     });
   }
 
-  ngOnInit() { }
-
+  ngOnInit() {}
 }
 
 

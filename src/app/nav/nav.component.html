@@ -1,6 +1,9 @@
 <!-- navbar.component.html -->
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-  <a class="navbar-brand" href="#">
+
+  
+  
+  <a class="navbar-brand" [routerLink]="['/home']" routerLinkActive="router-link-active" >
     CSI |
   </a>
 
@@ -11,12 +14,12 @@
 
   <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#header" (click)="toggleNavbarOff()">Home</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a mat-button [routerLink]="['/home']" routerLinkActive="router-link-active"  class="nav-link" href="#header" (click)="toggleNavbarOff()">Home</a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="#skills" (click)="toggleNavbarOff()">Feedback and support</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a mat-button class="nav-link" [routerLink]="['/feedback']" routerLinkActive="router-link-active"  href="#skills" (click)="toggleNavbarOff()">Feedback and support</a>
       </li>
     </ul>
       <button mat-button class="my-2 my-sm-0 mr-2" (click)="openDialogLogin()">Login</button>
