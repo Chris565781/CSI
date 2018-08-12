@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { OverviewComponent } from '../overview/overview.component';
 import { AuthService } from '../_services/auth.service';
+import { AlertifyService } from '../_services/alertify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-nav',
@@ -28,7 +30,9 @@ export class MainNavComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     public dialog: MatDialog,
-    public authService: AuthService
+    public authService: AuthService,
+    private router: Router,
+    private alertify: AlertifyService,
   ) {
     this.isHidden = true;
   }
@@ -56,5 +60,9 @@ export class MainNavComponent implements OnInit {
   }
 
   logout() {
+    localStorage.removeItem('token');
+    this.userLoggedIn = false;
+    this.alertify.success('Logged out');
+    this.router.navigate(['/home']);
   }
 }

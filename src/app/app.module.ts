@@ -26,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthService } from './_services/auth.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { AlertifyService } from './_services/alertify.service';
 
 
 
@@ -63,6 +64,7 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
   providers: [
     AuthService,
     ErrorInterceptorProvider,
+    AlertifyService,
   ],
   bootstrap: [AppComponent]
 })

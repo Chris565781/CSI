@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AuthService } from '../_services/auth.service';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-overview',
@@ -13,6 +14,7 @@ export class OverviewComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<OverviewComponent>,
+    private alertify: AlertifyService,
     private authService: AuthService,
     @Inject(MAT_DIALOG_DATA) public login: boolean
   ) {
@@ -32,7 +34,7 @@ export class OverviewComponent implements OnInit {
   userLogin() {
     console.log(this.model);
     this.authService.login(this.model).subscribe(next => {
-      console.log('logged in successfully');
+      this.alertify.success('Logged in successfully');
       this.dialogRef.close();
     }, error => {
       console.log(error);

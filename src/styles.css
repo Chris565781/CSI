@@ -2,6 +2,8 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import url('https://use.fontawesome.com/releases/v5.2.0/css/all.css');
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
+@import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
 
 .height {
   /* height: 1000px; */

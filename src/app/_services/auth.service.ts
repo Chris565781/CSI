@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { AlertifyService } from './alertify.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
   loginbs = new BehaviorSubject<boolean>(false);
   currentLoginbs = this.loginbs.asObservable();
   baseUrl = environment.apiUrl + 'auth/';
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private alertify: AlertifyService) {}
 
   changeloginbs() {
     console.log('Changing login bs');
