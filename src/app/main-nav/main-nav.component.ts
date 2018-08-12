@@ -1,26 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { OverviewComponent } from '../overview/overview.component';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-main-nav',
   templateUrl: './main-nav.component.html',
   styleUrls: ['./main-nav.component.css']
 })
-export class MainNavComponent {
+export class MainNavComponent implements OnInit {
+  items: string[] = [
+    'The first choice!',
+    'And another choice for you.',
+    'but wait! A third!'
+  ];
   isHidden: boolean;
   login = false;
-  userInfo: any = {};
+  userLoggedIn: boolean;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches)
-    );
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(map(result => result.matches));
 
-  constructor(private breakpointObserver: BreakpointObserver, public dialog: MatDialog) {
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    public dialog: MatDialog,
+    public authService: AuthService
+  ) {
     this.isHidden = true;
   }
 
@@ -30,13 +39,6 @@ export class MainNavComponent {
       /* width: '2000px', */
       data: true
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.userInfo = result;
-      console.log(this.userInfo.Username);
-      console.log(this.userInfo.Password);
-    });
   }
 
   openDialogRegister(): void {
@@ -45,11 +47,14 @@ export class MainNavComponent {
       /* width: '2000px', */
       data: false
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.userInfo = result;
-    });
   }
 
+  ngOnInit() {
+    this.authService.currentLoginbs.subscribe(
+      loginbs => (this.userLoggedIn = loginbs)
+    );
   }
+
+  logout() {
+  }
+}

@@ -1,16 +1,23 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav hidden" fixedInViewport="false" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)" [ngClass]="{hidden: !(isHandset$ | async)}">
+  <mat-sidenav #drawer class="sidenav hidden" fixedInViewport="false" [attr.role]="((isHandset$ | async) || userLoggedIn) ? 'dialog' : 'navigation'"
+    [mode]="((isHandset$ | async) || userLoggedIn) ? 'over' : 'side'" [opened]="!((isHandset$ | async) || userLoggedIn)" [ngClass]="{hidden: !((isHandset$ | async ) || userLoggedIn)}">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item [routerLink]="['/feedback']">Feedback and Support</a>
-      <a mat-list-item (click)="openDialogLogin()">Login</a>
-      <a mat-list-item (click)="openDialogRegister()">Register</a>
+      <mat-divider></mat-divider>
+      <div>
+        <a mat-list-item *ngIf="userLoggedIn" [routerLink]="['/dashboard']">Dashboard</a>
+        <a mat-list-item (click)="openDialogLogin()" *ngIf="!userLoggedIn">Login</a>
+        <mat-divider></mat-divider>
+        <a mat-list-item (click)="logout()" *ngIf="userLoggedIn">Log Out</a>
+        <a mat-list-item (click)="openDialogRegister()" *ngIf="!userLoggedIn">Register</a>
+        <mat-divider></mat-divider>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="(isHandset$ | async) || userLoggedIn">
         <i class="fas fa-bars"></i>
         <!-- <mat-icon aria-label="Side nav toggle icon">menu</mat-icon> -->
       </button>
@@ -20,7 +27,11 @@
       <span class="my-3 my-sm-0 mr-2">
         <button mat-button [routerLink]="['/feedback']">Feedback and Support</button>
       </span>
-      <div class="container d-flex justify-content-end">
+      <div class="container d-flex justify-content-end mr-2" *ngIf="userLoggedIn">
+        <!-- right side nav bar when logged in -->
+      </div>
+      <div class="container d-flex justify-content-end" *ngIf="!userLoggedIn">
+        <!-- right side nav bar when not logged in -->
         <button mat-button class="my-2 my-sm-0 mr-2 linkh" [ngClass]="{linkh: (isHandset$ | async)}" (click)="openDialogLogin()">Login</button>
         <button mat-button class="my-2 my-sm-0 mr-2 linkh" [ngClass]="{linkh: (isHandset$ | async)}" (click)="openDialogRegister()">Register</button>
       </div>

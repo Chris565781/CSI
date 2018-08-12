@@ -21,7 +21,11 @@ import { FooterComponent } from './footer/footer.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatIconModule, MatListModule } from '@angular/material';
 import { MainNavComponent } from './main-nav/main-nav.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthService } from './_services/auth.service';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
 
 
@@ -34,7 +38,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     OverviewComponent,
     HomeCardsComponent,
     FooterComponent,
-    MainNavComponent
+    MainNavComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,10 +57,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatListModule,
     FormsModule,
-    ReactiveFormsModule,
+    HttpClientModule,
   ],
   entryComponents: [OverviewComponent],
-  providers: [],
+  providers: [
+    AuthService,
+    ErrorInterceptorProvider,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
