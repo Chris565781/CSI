@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { AlertifyService } from './alertify.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,24 @@ export class AuthService {
   loginbs = new BehaviorSubject<boolean>(false);
   currentLoginbs = this.loginbs.asObservable();
   baseUrl = environment.apiUrl + 'auth/';
-  constructor(private http: HttpClient, private router: Router, private alertify: AlertifyService) {}
+  jwtHelper = new JwtHelperService();
 
-  changeloginbs() {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private alertify: AlertifyService
+  ) {}
+
+  changeLoginBsTrue() {
     console.log('Changing login bs');
-    this.loginbs.next(!this.loginbs.getValue());
+    this.loginbs.next(true);
+    this.alertify.success('Logged in successfully');
+  }
+
+  changeLoginBsFalse() {
+    console.log('Changing login bs');
+    this.loginbs.next(false);
+    this.alertify.success('Logged out successfully');
   }
 
   login(model: any) {
@@ -26,10 +40,15 @@ export class AuthService {
         const user = response;
         if (user) {
           localStorage.setItem('token', user.token);
-          this.changeloginbs();
+          this.changeLoginBsTrue();
           this.router.navigate(['/dashboard']);
         }
       })
     );
+  }
+
+  loggedIn() {
+    const token = localStorage.getItem('token');
+    return !this.jwtHelper.isTokenExpired(token);
   }
 }

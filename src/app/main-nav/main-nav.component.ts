@@ -32,7 +32,7 @@ export class MainNavComponent implements OnInit {
     public dialog: MatDialog,
     public authService: AuthService,
     private router: Router,
-    private alertify: AlertifyService,
+    private alertify: AlertifyService
   ) {
     this.isHidden = true;
   }
@@ -61,8 +61,12 @@ export class MainNavComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
-    this.userLoggedIn = false;
-    this.alertify.success('Logged out');
+    this.authService.changeLoginBsFalse();
     this.router.navigate(['/home']);
+  }
+
+  public loggedIn() {
+    const token = localStorage.getItem('token');
+    return !!token;
   }
 }
