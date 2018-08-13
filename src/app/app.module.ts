@@ -8,6 +8,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { AlertifyService } from './_services/alertify.service';
+
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -26,7 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthService } from './_services/auth.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
-import { AlertifyService } from './_services/alertify.service';
+import { NadeMapComponent } from './nade-map/nade-map.component';
 
 
 
@@ -41,6 +44,7 @@ import { AlertifyService } from './_services/alertify.service';
     FooterComponent,
     MainNavComponent,
     DashboardComponent,
+    NadeMapComponent
   ],
   imports: [
     BrowserModule,
@@ -59,12 +63,14 @@ import { AlertifyService } from './_services/alertify.service';
     MatListModule,
     FormsModule,
     HttpClientModule,
+    LeafletModule.forRoot()
   ],
   entryComponents: [OverviewComponent],
   providers: [
     AuthService,
     ErrorInterceptorProvider,
     AlertifyService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogClose } from '@angular/material';
 import { OverviewComponent } from '../overview/overview.component';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
@@ -53,20 +53,15 @@ export class MainNavComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.authService.currentLoginbs.subscribe(
-      loginbs => (this.userLoggedIn = loginbs)
-    );
-  }
+  ngOnInit() { }
 
   logout() {
     localStorage.removeItem('token');
-    this.authService.changeLoginBsFalse();
+    this.alertify.success('Logged out successfully');
     this.router.navigate(['/home']);
   }
 
-  public loggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token;
+  loggedIn() {
+    return this.authService.loggedIn();
   }
 }
