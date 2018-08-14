@@ -22,7 +22,7 @@
     </mat-tab>
     <mat-tab label="Register">
       <div class="container-fluid d-flex justify-content-center align-items-center mt-3">
-        <form class="example-form" #registerForm="ngForm" (ngSubmit)="userLogin()">
+        <form class="example-form" #registerForm="ngForm" (ngSubmit)="userRegister()">
           <div>
             <mat-form-field class="example-full-width mr-sm-2">
               <input matInput placeholder="Email" type="email" required required name="email" [(ngModel)]="model.email">

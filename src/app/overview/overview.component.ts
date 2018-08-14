@@ -34,15 +34,25 @@ export class OverviewComponent implements OnInit {
 
   userLogin() {
     console.log(this.model);
-    this.authService.login(this.model).subscribe(next => {
-      this.dialogRef.close();
-    }, error => {
-      console.log(error);
-    });
+    this.authService.login(this.model).subscribe(
+      next => {
+        this.dialogRef.close();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   userRegister() {
-
+    this.authService.register(this.model).subscribe(
+      () => {
+        this.alertify.success('registration successful');
+      },
+      error => {
+        this.alertify.error(error);
+      }
+    );
   }
 
   ngOnInit() {}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { latLng, tileLayer, marker } from 'leaflet';
+import { latLng, tileLayer, marker, icon } from 'leaflet';
 
 @Component({
   selector: 'app-nade-map',
@@ -11,9 +11,8 @@ export class NadeMapComponent implements OnInit {
     layers: [
       tileLayer('../../assets/img/ESEA.png', {
         maxZoom: 0,
-        attribution: '...'
+        attribution: '...',
       }),
-      marker([10, 10]),
     ],
     zoom: 1,
     center: latLng(46.879966, -121.726909)
