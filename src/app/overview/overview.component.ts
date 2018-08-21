@@ -3,6 +3,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { MainNavComponent } from '../main-nav/main-nav.component';
+import { User } from '../_models/user';
+import { UserService } from '../_services/user.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-overview',
@@ -12,6 +15,8 @@ import { MainNavComponent } from '../main-nav/main-nav.component';
 export class OverviewComponent implements OnInit {
   selectedIndex: any;
   model: any = {};
+  user: User;
+  token: any;
 
   constructor(
     public dialogRef: MatDialogRef<OverviewComponent>,
@@ -36,6 +41,7 @@ export class OverviewComponent implements OnInit {
     console.log(this.model);
     this.authService.login(this.model).subscribe(
       next => {
+        /*this.userService.getUser(this.model); */
         this.dialogRef.close();
       },
       error => {
@@ -47,6 +53,7 @@ export class OverviewComponent implements OnInit {
   userRegister() {
     this.authService.register(this.model).subscribe(
       () => {
+        this.selectedIndex = 0;
         this.alertify.success('registration successful');
       },
       error => {

@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { AlertifyService } from './_services/alertify.service';
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 import { AppComponent } from './app.component';
@@ -63,15 +64,10 @@ import { NadeMapComponent } from './nade-map/nade-map.component';
     MatListModule,
     FormsModule,
     HttpClientModule,
-    LeafletModule.forRoot()
+    LeafletModule.forRoot(),
   ],
   entryComponents: [OverviewComponent],
-  providers: [
-    AuthService,
-    ErrorInterceptorProvider,
-    AlertifyService,
-    AuthService
-  ],
+  providers: [AuthService, ErrorInterceptorProvider, AlertifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

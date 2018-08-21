@@ -8,6 +8,10 @@
       <div>
         <a mat-list-item *ngIf="loggedIn()" (click)="drawer.close()" [routerLink]="['/dashboard']">Dashboard</a>
         <a mat-list-item (click)="openDialogLogin()" (click)="drawer.close()" *ngIf="!loggedIn()">Login</a>
+        <div *ngIf="isAdmin()">
+          <mat-divider></mat-divider>
+          <a mat-list-item (click)="logout()" (click)="drawer.close()" *ngIf="loggedIn()">Admin Panel</a>
+        </div>
         <mat-divider></mat-divider>
         <a mat-list-item (click)="logout()" (click)="drawer.close()" *ngIf="loggedIn()">Log Out</a>
         <a mat-list-item (click)="openDialogRegister()" (click)="drawer.close()" *ngIf="!loggedIn()">Register</a>
@@ -30,6 +34,7 @@
       <div class="container d-flex justify-content-end mr-2" *ngIf="loggedIn()">
         <!-- right side nav bar when logged in -->
         <!-- {{ authService.decodedToken?.unique_name | uppercase }} -->
+        <!-- {{ authService.decodedToken?.nameid }} -->
       </div>
       <div class="container d-flex justify-content-end" *ngIf="!loggedIn()">
         <!-- right side nav bar when not logged in -->

@@ -7,6 +7,9 @@ import { OverviewComponent } from '../overview/overview.component';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { Router } from '@angular/router';
+import { User } from '../_models/user';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-main-nav',
@@ -14,14 +17,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./main-nav.component.css']
 })
 export class MainNavComponent implements OnInit {
-  items: string[] = [
-    'The first choice!',
-    'And another choice for you.',
-    'but wait! A third!'
-  ];
+  user: any;
   isHidden: boolean;
   login = false;
   userLoggedIn: boolean;
+  admin: boolean;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -32,7 +32,8 @@ export class MainNavComponent implements OnInit {
     public dialog: MatDialog,
     public authService: AuthService,
     private router: Router,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private userService: UserService,
   ) {
     this.isHidden = true;
   }
@@ -43,6 +44,13 @@ export class MainNavComponent implements OnInit {
       /* width: '2000px', */
       data: true
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.userService.getUser(this.authService.decodedToken.nameid).subscribe(response => {
+        this.admin = response.admin;
+      });
+    });
   }
 
   openDialogRegister(): void {
@@ -51,12 +59,29 @@ export class MainNavComponent implements OnInit {
       /* width: '2000px', */
       data: false
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
-  ngOnInit() { }
+  isAdmin() {
+    return this.admin;
+  }
+
+  ngOnInit() {
+    if (localStorage.getItem('token')) {
+      this.userService
+        .getUser(this.authService.decodedToken.nameid)
+        .subscribe(response => {
+          this.admin = response.admin;
+        });
+    }
+  }
 
   logout() {
     localStorage.removeItem('token');
+    this.admin = false;
     this.alertify.success('Logged out successfully');
     this.router.navigate(['/home']);
   }
