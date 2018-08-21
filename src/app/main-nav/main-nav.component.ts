@@ -22,6 +22,7 @@ export class MainNavComponent implements OnInit {
   login = false;
   userLoggedIn: boolean;
   admin: boolean;
+  token: any;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -47,7 +48,9 @@ export class MainNavComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.userService.getUser(this.authService.decodedToken.nameid).subscribe(response => {
+      /* this.authService.setToken(result); */
+      console.log(this.authService.decodedToken.nameid);
+      this.userService.getUser(this.authService.decodedToken.nameid, result.token).subscribe(response => {
         this.admin = response.admin;
       });
     });
@@ -62,6 +65,13 @@ export class MainNavComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      if (localStorage.getItem('token')) {
+        this.userService
+          .getUser(this.authService.decodedToken.nameid)
+          .subscribe(response => {
+            this.admin = response.admin;
+          });
+      }
     });
   }
 

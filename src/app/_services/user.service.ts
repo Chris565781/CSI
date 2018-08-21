@@ -18,7 +18,15 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUser(id): Observable<User> {
+  getUser(id, token?): Observable<User> {
+    const httpOptions2 = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token
+      })
+    };
+    if (token) {
+      return this.http.get<User>(this.baseUrl + 'users/' + id, httpOptions2);
+    }
     return this.http.get<User>(this.baseUrl + 'users/' + id, httpOptions);
   }
 }

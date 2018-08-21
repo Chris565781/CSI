@@ -42,10 +42,13 @@ export class OverviewComponent implements OnInit {
     this.authService.login(this.model).subscribe(
       next => {
         /*this.userService.getUser(this.model); */
-        this.dialogRef.close();
+        this.dialogRef.close({
+          decodedToken: this.authService.decodedToken,
+          token: this.authService.getToken(),
+        });
       },
       error => {
-        console.log(error);
+        this.alertify.error(error);
       }
     );
   }

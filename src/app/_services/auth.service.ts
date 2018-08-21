@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { AlertifyService } from './alertify.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { MainNavComponent } from '../main-nav/main-nav.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class AuthService {
   baseUrl = environment.apiUrl + 'auth/';
   jwtHelper = new JwtHelperService();
   decodedToken: any;
+  token: any;
 
   constructor(
     private http: HttpClient,
@@ -28,6 +30,7 @@ export class AuthService {
           localStorage.setItem('token', user.token);
           this.alertify.success('Logged in successfully');
           this.router.navigate(['/dashboard']);
+          this.token = user.token;
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
           console.log(this.decodedToken);
         }
@@ -42,5 +45,13 @@ export class AuthService {
   loggedIn() {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
+  }
+
+  setToken(token) {
+    this.decodedToken = token;
+  }
+
+  getToken() {
+    return this.token;
   }
 }

@@ -15,7 +15,6 @@ import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { NavComponent } from './nav/nav.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { OverviewComponent } from './overview/overview.component';
 import { RouterModule } from '@angular/router';
@@ -38,7 +37,6 @@ import { NadeMapComponent } from './nade-map/nade-map.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    NavComponent,
     FeedbackComponent,
     OverviewComponent,
     HomeCardsComponent,
