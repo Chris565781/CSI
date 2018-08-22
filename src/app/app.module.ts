@@ -11,6 +11,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { AlertifyService } from './_services/alertify.service';
 import { JwtModule } from '@auth0/angular-jwt';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
 import { AppComponent } from './app.component';
@@ -63,6 +64,7 @@ import { NadeMapComponent } from './nade-map/nade-map.component';
     FormsModule,
     HttpClientModule,
     LeafletModule.forRoot(),
+    BsDropdownModule.forRoot(),
   ],
   entryComponents: [OverviewComponent],
   providers: [AuthService, ErrorInterceptorProvider, AlertifyService],

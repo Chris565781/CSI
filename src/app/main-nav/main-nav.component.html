@@ -5,17 +5,22 @@
     <mat-nav-list>
       <a mat-list-item [routerLink]="['/feedback']" (click)="drawer.close()">Feedback and Support</a>
       <mat-divider></mat-divider>
-      <div>
-        <a mat-list-item *ngIf="loggedIn()" (click)="drawer.close()" [routerLink]="['/dashboard']">Dashboard</a>
+      <div *ngIf="!loggedIn()">
         <a mat-list-item (click)="openDialogLogin()" (click)="drawer.close()" *ngIf="!loggedIn()">Login</a>
+        <mat-divider></mat-divider>
+        <a mat-list-item (click)="openDialogRegister()" (click)="drawer.close()" *ngIf="!loggedIn()">Register</a>
+        <mat-divider></mat-divider>
+      </div>
+      <div *ngIf="loggedIn()">
+        <a mat-list-item *ngIf="loggedIn()" (click)="drawer.close()" [routerLink]="['/dashboard']">Dashboard</a>
+        <mat-divider></mat-divider>
+        <a mat-list-item *ngIf="loggedIn()" (click)="drawer.close()" [routerLink]="['/dashboard']">My Profile</a>
         <div *ngIf="isAdmin()">
           <mat-divider></mat-divider>
           <a mat-list-item (click)="logout()" (click)="drawer.close()" *ngIf="loggedIn()">Admin Panel</a>
         </div>
         <mat-divider></mat-divider>
         <a mat-list-item (click)="logout()" (click)="drawer.close()" *ngIf="loggedIn()">Log Out</a>
-        <a mat-list-item (click)="openDialogRegister()" (click)="drawer.close()" *ngIf="!loggedIn()">Register</a>
-        <mat-divider></mat-divider>
       </div>
     </mat-nav-list>
   </mat-sidenav>
@@ -31,9 +36,62 @@
       <span class="my-3 my-sm-0 mr-2">
         <button mat-button [routerLink]="['/feedback']">Feedback and Support</button>
       </span>
-      <div class="container d-flex justify-content-end mr-2" *ngIf="loggedIn()">
+      <div class="container d-flex justify-content-end mr-3" *ngIf="loggedIn()">
         <!-- right side nav bar when logged in -->
-        <!-- {{ authService.decodedToken?.unique_name | uppercase }} -->
+
+        
+        <div class="btn-group" dropdown>
+        <button id="BUTTON_1" dropdownToggle type="button" class="btn btn-primary dropdown-toggle d-flex align-items-center" aria-controls="dropdown-basic">
+          <div id="DIV_2">
+            <div id="DIV_3">
+              <div id="DIV_4">
+                <figure id="FIGURE_5">
+                  <div id="DIV_6">
+                    <img src="https://static-cdn.jtvnw.net/user-default-pictures/27103734-3cda-44d6-a384-f2ab71e4bb85-profile_image-70x70.jpg"
+                      alt="User avatar" id="IMG_7" />
+                  </div>
+                  <div id="DIV_8">
+                    <div id="DIV_9">
+                      <div id="DIV_10">
+                      </div>
+                      <div id="DIV_11">
+                      </div>
+                    </div>
+                  </div>
+                </figure>
+              </div>
+            </div>
+            <div id="DIV_12">
+              <div id="DIV_13">
+                <p id="P_14">
+                  {{ authService.decodedToken?.unique_name | uppercase }}
+                </p>
+              </div>
+              <div id="DIV_15">
+                <div id="DIV_16">
+                  <span id="SPAN_17"><span id="SPAN_18">Your Profile</span></span>
+                </div>
+              </div>
+            </div>
+            <div id="DIV_19">
+              <figure id="FIGURE_20">
+                <svg id="svg_21">
+                  <path id="path_22">
+                  </path>
+                </svg>
+              </figure>
+            </div>
+          </div>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem"><a class="dropdown-item" href="#">Profile Pic</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="logout()">Log Out</a>
+            </li>
+          </ul>
+        </button>
+        </div>
+        
+
         <!-- {{ authService.decodedToken?.nameid }} -->
       </div>
       <div class="container d-flex justify-content-end" *ngIf="!loggedIn()">
