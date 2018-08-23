@@ -56,8 +56,8 @@ export class OverviewComponent implements OnInit {
   userRegister() {
     this.authService.register(this.model).subscribe(
       () => {
-        this.selectedIndex = 0;
         this.alertify.success('registration successful');
+        this.selectedIndex = 0;
       },
       error => {
         this.alertify.error(error);

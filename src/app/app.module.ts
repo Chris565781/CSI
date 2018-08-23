@@ -31,6 +31,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthService } from './_services/auth.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { NadeMapComponent } from './nade-map/nade-map.component';
+import { UploadOverviewComponent } from './upload-overview/upload-overview.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 
@@ -44,7 +46,8 @@ import { NadeMapComponent } from './nade-map/nade-map.component';
     FooterComponent,
     MainNavComponent,
     DashboardComponent,
-    NadeMapComponent
+    NadeMapComponent,
+    UploadOverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,11 +65,15 @@ import { NadeMapComponent } from './nade-map/nade-map.component';
     MatIconModule,
     MatListModule,
     FormsModule,
+    FileUploadModule,
     HttpClientModule,
     LeafletModule.forRoot(),
     BsDropdownModule.forRoot(),
   ],
-  entryComponents: [OverviewComponent],
+  entryComponents: [
+    OverviewComponent,
+    UploadOverviewComponent,
+  ],
   providers: [AuthService, ErrorInterceptorProvider, AlertifyService],
   bootstrap: [AppComponent]
 })

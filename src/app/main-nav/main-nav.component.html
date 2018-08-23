@@ -41,13 +41,13 @@
 
         
         <div class="btn-group" dropdown>
-        <button id="BUTTON_1" dropdownToggle type="button" class="btn btn-primary dropdown-toggle d-flex align-items-center" aria-controls="dropdown-basic">
+        <button mat-button id="BUTTON_1" dropdownToggle type="button" class="btn btn-primary dropdown-toggle d-flex align-items-center" aria-controls="dropdown-basic">
           <div id="DIV_2">
             <div id="DIV_3">
               <div id="DIV_4">
                 <figure id="FIGURE_5">
                   <div id="DIV_6">
-                    <img src="https://static-cdn.jtvnw.net/user-default-pictures/27103734-3cda-44d6-a384-f2ab71e4bb85-profile_image-70x70.jpg"
+                    <img src={{currentPhoto}}
                       alt="User avatar" id="IMG_7" />
                   </div>
                   <div id="DIV_8">
@@ -83,7 +83,7 @@
             </div>
           </div>
           <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-            <li role="menuitem"><a class="dropdown-item" href="#">Profile Pic</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="openDialogPhoto()" (click)="drawer.close()">Update Profile Pic</a></li>
             <li class="divider dropdown-divider"></li>
             <li role="menuitem"><a class="dropdown-item" (click)="logout()">Log Out</a>
             </li>

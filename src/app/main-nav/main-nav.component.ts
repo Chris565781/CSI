@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { User } from '../_models/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from '../_services/user.service';
+import { UploadOverviewComponent } from '../upload-overview/upload-overview.component';
+import { Photo } from '../_models/photo';
 
 @Component({
   selector: 'app-main-nav',
@@ -23,6 +25,7 @@ export class MainNavComponent implements OnInit {
   userLoggedIn: boolean;
   admin: boolean;
   token: any;
+  currentPhoto: any;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -52,6 +55,10 @@ export class MainNavComponent implements OnInit {
       console.log(this.authService.decodedToken.nameid);
       this.userService.getUser(this.authService.decodedToken.nameid, result.token).subscribe(response => {
         this.admin = response.admin;
+        this.currentPhoto = response.photoUrl;
+        if (this.currentPhoto == null) {
+          this.currentPhoto = 'https://i.redd.it/1s0j5e4fhws01.png';
+        }
       });
     });
   }
@@ -65,15 +72,21 @@ export class MainNavComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      if (localStorage.getItem('token')) {
-        this.userService
-          .getUser(this.authService.decodedToken.nameid)
-          .subscribe(response => {
-            this.admin = response.admin;
-          });
+    });
+  }
+
+  openDialogPhoto(): void {
+    const dialogRef2 = this.dialog.open(UploadOverviewComponent, {
+      /* width: '2000px', */
+    });
+
+    dialogRef2.afterClosed().subscribe(result => {
+      if (result != null) {
+        this.currentPhoto = result;
       }
     });
   }
+
 
   isAdmin() {
     return this.admin;
@@ -85,6 +98,10 @@ export class MainNavComponent implements OnInit {
         .getUser(this.authService.decodedToken.nameid)
         .subscribe(response => {
           this.admin = response.admin;
+          this.currentPhoto = response.photoUrl;
+          if (this.currentPhoto == null) {
+            this.currentPhoto = 'https://i.redd.it/1s0j5e4fhws01.png';
+          }
         });
     }
   }
