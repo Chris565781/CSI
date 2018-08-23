@@ -81,10 +81,20 @@ export class MainNavComponent implements OnInit {
     });
 
     dialogRef2.afterClosed().subscribe(result => {
-      if (result != null) {
-        this.currentPhoto = result;
-      }
+      this.updatePhoto();
     });
+  }
+
+  updatePhoto() {
+    this.userService
+      .getUser(this.authService.decodedToken.nameid)
+      .subscribe(response => {
+        this.admin = response.admin;
+        this.currentPhoto = response.photoUrl;
+        if (this.currentPhoto == null) {
+          this.currentPhoto = 'https://i.redd.it/1s0j5e4fhws01.png';
+        }
+      });
   }
 
 
@@ -94,15 +104,7 @@ export class MainNavComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('token')) {
-      this.userService
-        .getUser(this.authService.decodedToken.nameid)
-        .subscribe(response => {
-          this.admin = response.admin;
-          this.currentPhoto = response.photoUrl;
-          if (this.currentPhoto == null) {
-            this.currentPhoto = 'https://i.redd.it/1s0j5e4fhws01.png';
-          }
-        });
+      this.updatePhoto();
     }
   }
 

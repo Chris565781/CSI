@@ -55,13 +55,7 @@ export class UploadOverviewComponent implements OnInit {
           isMain: res.isMain,
         };
         this.currentPhoto = photo;
-        this.dialogRef.close({
-          id: res.id,
-          url: res.url,
-          dateAdded: res.dateAdded,
-          description: res.description,
-          isMain: res.isMain
-        });
+        this.dialogRef.close();
       }
     };
   }
