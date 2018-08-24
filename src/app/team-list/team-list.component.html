@@ -1,0 +1,7 @@
+<div *ngFor="let team of teams">
+{{team?.name}}
+<p *ngFor="let player of players | myfilter:team">
+  {{player.name}}
+</p>
+</div>
+  

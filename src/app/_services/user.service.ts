@@ -3,6 +3,9 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
+import { PlayerList } from '../_models/PlayerList';
+import { Player } from '../_models/Player';
+import { Team } from '../_models/Team';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,7 +19,7 @@ const httpOptions = {
 export class UserService {
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getUser(id, token?): Observable<User> {
     const httpOptions2 = {
@@ -28,5 +31,17 @@ export class UserService {
       return this.http.get<User>(this.baseUrl + 'users/' + id, httpOptions2);
     }
     return this.http.get<User>(this.baseUrl + 'users/' + id, httpOptions);
+  }
+
+  getPlayers(): Observable<PlayerList[]> {
+    return this.http.get<PlayerList[]>(this.baseUrl + 'players', httpOptions);
+  }
+
+  getTeams(): Observable<Team[]> {
+    return this.http.get<Team[]>(this.baseUrl + 'teams', httpOptions);
+  }
+
+  getPlayer(id, token?): Observable<Player> {
+    return this.http.get<Player>(this.baseUrl + 'players/' + id, httpOptions);
   }
 }

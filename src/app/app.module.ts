@@ -33,6 +33,8 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { NadeMapComponent } from './nade-map/nade-map.component';
 import { UploadOverviewComponent } from './upload-overview/upload-overview.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { TeamListComponent } from './team-list/team-list.component';
+import { MyFilterPipe } from './_pipes/MyFilterPipe';
 
 
 
@@ -48,6 +50,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     DashboardComponent,
     NadeMapComponent,
     UploadOverviewComponent,
+    TeamListComponent,
+    MyFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -68,12 +72,9 @@ import { FileUploadModule } from 'ng2-file-upload';
     FileUploadModule,
     HttpClientModule,
     LeafletModule.forRoot(),
-    BsDropdownModule.forRoot(),
+    BsDropdownModule.forRoot()
   ],
-  entryComponents: [
-    OverviewComponent,
-    UploadOverviewComponent,
-  ],
+  entryComponents: [OverviewComponent, UploadOverviewComponent],
   providers: [AuthService, ErrorInterceptorProvider, AlertifyService],
   bootstrap: [AppComponent]
 })
