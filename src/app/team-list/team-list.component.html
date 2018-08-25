@@ -1,7 +1,21 @@
-<div *ngFor="let team of teams">
-{{team?.name}}
-<p *ngFor="let player of players | myfilter:team">
-  {{player.name}}
-</p>
+<div id="background">
+  <div class="container col-md-10">
+    <div *ngFor="let team of teams">
+      <div class="row justify-content-center">
+        <div>
+          <span class="col-md-2 inline1 crosshair" *ngFor="let player of players | myfilter:team">
+            <div [routerLink]="['/players/', player.id]" class="imdesc">
+              <img class="" style="width: 130px; height: 150px;" src="{{player.photoUrl}}" />
+              <p class="">{{player.name}}</p>
+            </div>
+          </span>
+        </div>
+
+        <div class="box1 mb-5 justify-self-center">
+          <img class="mr-2" style="width: 40px; height: 45px;" src="{{team?.logoUrl}}" alt=""> {{team?.name}}
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
-  

@@ -58,3 +58,16 @@ html,
 body {
   height: 100%;
 }
+
+.crosshair {
+  cursor: crosshair;
+}
+
+.crosshair-card {
+  cursor: crosshair;
+}
+
+#background {
+    background: url(assets/img/Maps/Inferno1.jpg) center/cover no-repeat fixed;
+    min-height: 120vh;
+}
